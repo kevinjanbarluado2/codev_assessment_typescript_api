@@ -18,7 +18,3 @@ To test the API:
 ## Testing
 
 You can use Postman to test the API endpoints.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
