@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "bcc7a394-01f7-4c99-b7ba-7d673a56cb2f",
+		"name": "codev_typescript_assessment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28020833"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "/api/jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/jobs/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/jobs/<id>",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/jobs/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/jobs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"<string>\",\r\n    \"industry\":\"<integer>\",\r\n    \"description\":\"<string>\",\r\n    \"noOfOpenings\":\"<integer>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/jobs/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/jobs/<id>",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"<string>\",\r\n    \"industry\":\"<integer>\",\r\n    \"description\":\"<string>\",\r\n    \"noOfOpenings\":\"<integer>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/jobs/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/jobs/<id>",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"<string>\",\r\n    \"industry\":\"<integer>\",\r\n    \"description\":\"<string>\",\r\n    \"noOfOpenings\":\"<integer>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/jobs/{{id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"jobs",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:2000/api",
+			"type": "string"
+		},
+		{
+			"key": "id",
+			"value": "<id>"
+		}
+	]
+}

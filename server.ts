@@ -31,8 +31,9 @@ function validateJobFields(req: Request, res: Response, next: () => void) {
         typeof noOfOpenings !== 'number' ||
         typeof title !== 'string' ||
         typeof description !== 'string' ||
-        typeof industry !== 'string'
+        typeof industry !== 'number'
     ) {
+        console.log()
         return res.status(400).json({ success: false, error: 'Invalid data types in request body' });
     }
 
@@ -58,7 +59,7 @@ app.post('/api/jobs', validateJobFields, (req: Request, res: Response) => {
 });
 
 // GET all jobs route
-app.get('/api/jobs', (req, res) => {
+app.get('/api/jobs', (req: Request, res: Response) => {
     try {
         if (jobs.length > 0) {
             res.status(200).json({ success: true, data: jobs });
@@ -72,7 +73,7 @@ app.get('/api/jobs', (req, res) => {
 });
 
 // GET job by id
-app.get('/api/jobs/:id', (req, res) => {
+app.get('/api/jobs/:id', (req: Request, res: Response) => {
     try {
         const jobId = req.params.id;
         const job = jobs.find((j) => j.id === jobId);
@@ -87,8 +88,8 @@ app.get('/api/jobs/:id', (req, res) => {
     }
 });
 
-// Update job by id
-app.put('/api/jobs/:id', (req, res) => {
+// PUT route to update a job by ID
+app.put('/api/jobs/:id', (req: Request, res: Response) => {
     try {
         const jobId = req.params.id;
         const updatedJobData = req.body;
@@ -97,8 +98,22 @@ app.put('/api/jobs/:id', (req, res) => {
         if (index === -1) {
             res.status(404).json({ success: false, error: 'Job not found' });
         } else {
-            jobs[index] = { ...jobs[index], ...updatedJobData };
-            res.status(200).json({ success: true, data: jobs[index] });
+            // Avoid updating the id and handle empty values
+            const { id, ...updatedData } = updatedJobData;
+
+            // Filter out empty values
+            for (const key in updatedData) {
+                if (updatedData[key] === undefined || updatedData[key] === null) {
+                    delete updatedData[key];
+                }
+            }
+
+            jobs[index] = { ...jobs[index], ...updatedData };
+
+            // Omit 'id' property from updatedJob
+            const { id: omittedId, ...updatedJob } = jobs[index];
+
+            res.status(200).json({ success: true, data: updatedJob });
         }
     } catch (error) {
         res.status(500).json({ success: false, error: 'Failed to update the job' });
@@ -106,7 +121,7 @@ app.put('/api/jobs/:id', (req, res) => {
 });
 
 // Delete job by id
-app.delete('/api/jobs/:id', (req, res) => {
+app.delete('/api/jobs/:id', (req: Request, res: Response) => {
     try {
         const jobId = req.params.id;
         const index = jobs.findIndex((j) => j.id === jobId);
